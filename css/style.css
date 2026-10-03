@@ -367,7 +367,7 @@ p { margin: 0 0 1em; color: var(--ink-soft); }
   overflow: hidden;
   background: var(--green-50);
 }
-.route-art svg { width: 100%; height: 100%; }
+.route-art svg, .route-art img { width: 100%; height: 100%; object-fit: cover; }
 
 .route-title-block .eyebrow { font-size: 0.72rem; margin-bottom: 6px; }
 .route-title-block .eyebrow::before { width: 16px; }

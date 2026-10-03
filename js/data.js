@@ -6,6 +6,7 @@ const TREKS = [
     name: "Kedarkantha Trek",
     region: "Uttarakhand, India",
     tagline: "A winter summit wrapped in snow and pine",
+    image: "assets/images/kedarkantha.webp",
     difficulty: 1, // 1 easy, 2 moderate, 3 hard
     difficultyLabel: "Easy – Moderate",
     duration: "6 days",

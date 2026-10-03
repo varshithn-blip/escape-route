@@ -104,6 +104,9 @@
   };
 
   function buildRouteArt(trek, index) {
+    if (trek.image) {
+      return `<img src="${escapeHtml(trek.image)}" alt="${escapeHtml(trek.name)} — ${escapeHtml(trek.tagline)}" loading="lazy" />`;
+    }
     const ramp = ART_RAMPS[trek.difficulty] || ART_RAMPS[2];
     const ringCount = 3 + trek.difficulty; // taller difficulty -> a few more contours
     const cx = 170, cy = 165, baseR = 11;
