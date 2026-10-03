@@ -83,6 +83,7 @@ const TREKS = [
     name: "Hampta Pass Trek",
     region: "Himachal Pradesh, India",
     tagline: "One pass, two worlds: green valley to lunar desert",
+    image: "assets/images/hampta-pass.webp",
     difficulty: 2,
     difficultyLabel: "Moderate",
     duration: "5 days",
