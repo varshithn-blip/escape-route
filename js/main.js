@@ -66,9 +66,9 @@
 
   /* ---------------- route art (per-trek mountain illustration) ---------------- */
   const ART_PALETTES = [
-    { far: "#d9c7a8", mid: "#b99b73", near: "#8a6a4a", snow: "#fbf6ec" },
-    { far: "#c7b394", mid: "#a8622f", near: "#6b4f37", snow: "#fdf9f3" },
-    { far: "#9f8b73", mid: "#6b4f37", near: "#2e2015", snow: "#ffffff" },
+    { far: "#cdf1dd", mid: "#5fcf92", near: "#0f9d63", snow: "#ffffff" },
+    { far: "#a0e3bc", mid: "#0f9d63", near: "#067a4c", snow: "#ffffff" },
+    { far: "#5fcf92", mid: "#067a4c", near: "#06412a", snow: "#ffffff" },
   ];
   function buildRouteArt(trek, index) {
     const p = ART_PALETTES[index % ART_PALETTES.length];
@@ -117,7 +117,7 @@
       const labelY = above ? c.y - 10 : c.y + 40;
       labels += `<text x="${c.x}" y="${valueY}" text-anchor="middle" class="alt-point-value">${c.m.toLocaleString()}m</text>`;
       labels += `<text x="${c.x}" y="${labelY}" text-anchor="middle" class="alt-point-label">${escapeHtml(c.label)}</text>`;
-      dots += `<circle cx="${c.x}" cy="${c.y}" r="4.5" fill="#fffdfb" stroke="#8a4e23" stroke-width="2.5"/>`;
+      dots += `<circle cx="${c.x}" cy="${c.y}" r="4.5" fill="#ffffff" stroke="#067a4c" stroke-width="2.5"/>`;
     });
 
     return `
@@ -126,12 +126,12 @@
         <svg viewBox="0 0 ${w} ${h}" class="altitude-svg" role="img" aria-label="Altitude profile for ${escapeHtml(trek.name)}, ranging from ${min.toLocaleString()} to ${max.toLocaleString()} metres">
           <defs>
             <linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#a8622f" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#a8622f" stop-opacity="0"/>
+              <stop offset="0%" stop-color="#0f9d63" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#0f9d63" stop-opacity="0"/>
             </linearGradient>
           </defs>
           <path d="${areaPath}" fill="url(#${gradId})"/>
-          <path d="${linePath}" fill="none" stroke="#8a4e23" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="${linePath}" fill="none" stroke="#067a4c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           ${dots}
           ${labels}
         </svg>
