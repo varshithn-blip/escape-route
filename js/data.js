@@ -153,6 +153,7 @@ const TREKS = [
     name: "Everest Base Camp Trek",
     region: "Khumbu, Nepal",
     tagline: "Walk to the foot of the world's highest mountain",
+    image: "assets/images/everest-base-camp.webp",
     difficulty: 3,
     difficultyLabel: "Challenging",
     duration: "12 days",
