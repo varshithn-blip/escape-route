@@ -1,0 +1,248 @@
+/* Trek and availability data for Escape Route */
+
+const TREKS = [
+  {
+    id: "kedarkantha",
+    name: "Kedarkantha Trek",
+    region: "Uttarakhand, India",
+    tagline: "A winter summit wrapped in snow and pine",
+    difficulty: 1, // 1 easy, 2 moderate, 3 hard
+    difficultyLabel: "Easy – Moderate",
+    duration: "6 days",
+    distanceKm: 20,
+    maxAltitudeM: 3810,
+    maxAltitudeFt: 12500,
+    groupSize: "6–14 trekkers",
+    bestSeason: "Late Dec – early Apr",
+    startEnd: "Dehradun to Dehradun",
+    price: "₹9,500",
+    summary:
+      "The trek most first-timers fall in love with. Kedarkantha climbs through snow-dusted pine and oak forest to a 360° summit view of over a hundred Himalayan peaks, including Swargarohini and Bandarpoonch. Gentle enough for a first winter trek, big enough to feel like a real one.",
+    highlights: [
+      "Summit views of Swargarohini, Bandarpoonch and Black Peak",
+      "Camping on snow in the meadows of Juda Ka Talab",
+      "Dense pine and oak forest trails, frequently under fresh snow",
+      "A short, sharp summit push rewarded with a sunrise push to the top",
+    ],
+    altitudeProfile: [
+      { day: "Day 1", label: "Sankri", m: 1920 },
+      { day: "Day 2", label: "Juda Ka Talab", m: 2850 },
+      { day: "Day 3", label: "Kedarkantha Base", m: 3400 },
+      { day: "Day 4", label: "Summit", m: 3810 },
+      { day: "Day 5", label: "Hargaon", m: 2750 },
+      { day: "Day 6", label: "Sankri", m: 1920 },
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Drive in and settle at Sankri",
+        terrain: "road",
+        desc: "Arrive at the trailhead village of Sankri after a scenic drive along the Supin river. Short acclimatisation walk and briefing in the evening.",
+      },
+      {
+        day: 2,
+        title: "Sankri to Juda Ka Talab",
+        terrain: "forest",
+        desc: "Climb steadily through thick pine forest to a frozen alpine lake ringed by meadow. Camp beside the lake as temperatures drop sharply after dark.",
+      },
+      {
+        day: 3,
+        title: "Juda Ka Talab to Kedarkantha Base",
+        terrain: "snow",
+        desc: "Shorter day across open, snow-covered meadows with the summit visible for most of the walk. Afternoon rest before an early night ahead of the summit push.",
+      },
+      {
+        day: 4,
+        title: "Summit day and descent to Hargaon",
+        terrain: "summit",
+        desc: "Pre-dawn start for the summit under headlamp. A steep final ridge opens onto a 360° view at 3,810m, then a long descent to the Hargaon forest camp.",
+      },
+      {
+        day: 5,
+        title: "Hargaon to Sankri",
+        terrain: "forest",
+        desc: "Easy descent back through forest to Sankri. Afternoon free to rest, dry gear and celebrate.",
+      },
+      {
+        day: 6,
+        title: "Drive back to Dehradun",
+        terrain: "road",
+        desc: "Early departure for the drive back, arriving in Dehradun by evening.",
+      },
+    ],
+    expect: [
+      "Daily walking of 3–6 hours, mostly gradual with one steep summit push",
+      "Overnight temperatures of -5°C to -10°C above Juda Ka Talab",
+      "Guided groups with a trek leader, local support staff and basic medical kit",
+      "Tented camping, shared sleeping bags and mats provided",
+    ],
+  },
+  {
+    id: "hampta-pass",
+    name: "Hampta Pass Trek",
+    region: "Himachal Pradesh, India",
+    tagline: "One pass, two worlds: green valley to lunar desert",
+    difficulty: 2,
+    difficultyLabel: "Moderate",
+    duration: "5 days",
+    distanceKm: 35,
+    maxAltitudeM: 4270,
+    maxAltitudeFt: 14100,
+    groupSize: "6–14 trekkers",
+    bestSeason: "Jun – Sep",
+    startEnd: "Manali to Manali",
+    price: "₹11,500",
+    summary:
+      "Hampta Pass is a crossing, not just a climb. It links the lush Kullu valley to the stark, high-desert folds of Lahaul in a single trek — meadows and waterfalls on one side, a Martian landscape and the Chandratal lake side-trip on the other.",
+    highlights: [
+      "Dramatic change in landscape from green valley to high-altitude desert",
+      "Optional side trip to the turquoise Chandratal (Moon Lake)",
+      "River crossings and a glacier descent into Lahaul",
+      "Wide, open campsites at Balu Ka Ghera and Siagoru",
+    ],
+    altitudeProfile: [
+      { day: "Day 1", label: "Jobra to Chika", m: 3100 },
+      { day: "Day 2", label: "Balu Ka Ghera", m: 3650 },
+      { day: "Day 3", label: "Hampta Pass → Siagoru", m: 3800 },
+      { day: "Day 4", label: "Chandratal side trip", m: 4300 },
+      { day: "Day 5", label: "Drive out via Manali", m: 2050 },
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Jobra to Chika",
+        terrain: "forest",
+        desc: "A short, steep start through maple forest beside the Rani Nallah stream, opening onto the first wide meadow campsite.",
+      },
+      {
+        day: 2,
+        title: "Chika to Balu Ka Ghera",
+        terrain: "meadow",
+        desc: "Long valley walk across rolling meadows and loose river-bed sections, with the pass now visible ahead.",
+      },
+      {
+        day: 3,
+        title: "Cross Hampta Pass to Siagoru",
+        terrain: "pass",
+        desc: "The main event: a steep climb to the 4,270m pass, then a dramatic descent over scree and a snow patch into the bare, brown landscape of Lahaul.",
+      },
+      {
+        day: 4,
+        title: "Chandratal side trip and drive to Manali",
+        terrain: "lake",
+        desc: "Jeep transfer to the Chandratal basin for a walk around the lake, before the drive back over Rohtang to Manali.",
+      },
+      {
+        day: 5,
+        title: "Buffer / departure",
+        terrain: "road",
+        desc: "Kept as a weather buffer for the pass crossing; used for departure when the itinerary runs on schedule.",
+      },
+    ],
+    expect: [
+      "Daily walking of 5–7 hours including one demanding pass-crossing day",
+      "River crossings in cold glacial water — trekking sandals recommended",
+      "Highly variable weather on the pass; afternoon winds are common",
+      "Camping at altitude with a support crew and pack mules for common gear",
+    ],
+  },
+  {
+    id: "everest-base-camp",
+    name: "Everest Base Camp Trek",
+    region: "Khumbu, Nepal",
+    tagline: "Walk to the foot of the world's highest mountain",
+    difficulty: 3,
+    difficultyLabel: "Challenging",
+    duration: "12 days",
+    distanceKm: 130,
+    maxAltitudeM: 5364,
+    maxAltitudeFt: 17598,
+    groupSize: "4–10 trekkers",
+    bestSeason: "Mar – May, Sep – Nov",
+    startEnd: "Kathmandu to Kathmandu (fly via Lukla)",
+    price: "₹1,65,000",
+    summary:
+      "The classic. A flight into Lukla, the Sherpa capital of Namche Bazaar, monasteries at Tengboche, and days of thinning air leading to Base Camp itself and the sunrise viewpoint of Kala Patthar — all of it in the shadow of Everest, Lhotse, Nuptse and Ama Dablam.",
+    highlights: [
+      "Standing at Everest Base Camp beneath the Khumbu Icefall",
+      "Sunrise over Everest from Kala Patthar (5,545m)",
+      "Sherpa villages, monasteries and the markets of Namche Bazaar",
+      "Close-up views of Ama Dablam, Lhotse and Nuptse throughout",
+    ],
+    altitudeProfile: [
+      { day: "Day 1–2", label: "Lukla → Namche Bazaar", m: 3440 },
+      { day: "Day 3–4", label: "Acclimatisation", m: 3440 },
+      { day: "Day 5–6", label: "Tengboche → Dingboche", m: 4410 },
+      { day: "Day 7–8", label: "Lobuche → Gorak Shep", m: 5164 },
+      { day: "Day 9", label: "Base Camp & Kala Patthar", m: 5364 },
+      { day: "Day 10–12", label: "Descent to Lukla", m: 2860 },
+    ],
+    itinerary: [
+      {
+        day: "1–2",
+        title: "Fly to Lukla, trek to Namche Bazaar",
+        terrain: "forest",
+        desc: "A dramatic mountain flight into Lukla, then two days of walking along the Dudh Koshi river up to the Sherpa hub of Namche Bazaar (3,440m).",
+      },
+      {
+        day: "3–4",
+        title: "Acclimatisation around Namche",
+        terrain: "acclimatise",
+        desc: "A rest day built around a high walk to Everest View Hotel or the Khumjung monastery — climb high, sleep low.",
+      },
+      {
+        day: "5–6",
+        title: "Namche to Tengboche to Dingboche",
+        terrain: "monastery",
+        desc: "Past the famous Tengboche monastery with its amphitheatre of peaks, then into the drier upper valley to Dingboche (4,410m).",
+      },
+      {
+        day: "7–8",
+        title: "Dingboche to Lobuche to Gorak Shep",
+        terrain: "glacier",
+        desc: "The trail runs alongside the Khumbu Glacier's moraine, past memorials at Thukla, to the last settlement at Gorak Shep (5,164m).",
+      },
+      {
+        day: 9,
+        title: "Everest Base Camp and Kala Patthar",
+        terrain: "summit",
+        desc: "Walk out to Base Camp itself among the icefall and expedition tents, then a pre-dawn climb of Kala Patthar for sunrise on Everest.",
+      },
+      {
+        day: "10–12",
+        title: "Descent to Lukla, fly to Kathmandu",
+        terrain: "road",
+        desc: "A faster descent back through Pheriche and Namche to Lukla, then the return flight to Kathmandu.",
+      },
+    ],
+    expect: [
+      "Daily walking of 5–7 hours; altitude, not distance, is the real challenge",
+      "Two built-in acclimatisation days to manage altitude sickness risk",
+      "Teahouse lodging throughout — no tents required",
+      "Recommended prior trekking experience above 4,000m",
+    ],
+  },
+];
+
+// Available guided-group departure dates, ISO yyyy-mm-dd, grouped by trek id.
+// Shown on the booking calendar; private/custom dates can be requested via the enquiry form.
+const AVAILABILITY = {
+  kedarkantha: [
+    "2026-12-18", "2026-12-26",
+    "2027-01-02", "2027-01-09", "2027-01-16", "2027-01-23", "2027-01-30",
+    "2027-02-06", "2027-02-13", "2027-02-20",
+    "2027-03-06", "2027-03-20",
+  ],
+  "hampta-pass": [
+    "2027-06-12", "2027-06-19", "2027-06-26",
+    "2027-07-03", "2027-07-10", "2027-07-17", "2027-07-24", "2027-07-31",
+    "2027-08-07", "2027-08-14", "2027-08-21", "2027-08-28",
+    "2027-09-04", "2027-09-11",
+  ],
+  "everest-base-camp": [
+    "2026-10-15", "2026-10-29",
+    "2026-11-12",
+    "2027-03-18", "2027-04-01", "2027-04-15", "2027-04-29",
+    "2027-05-06",
+  ],
+};
