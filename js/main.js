@@ -64,24 +64,63 @@
     return `<svg viewBox="0 0 24 24" fill="none">${TERRAIN_ICON[key] || TERRAIN_ICON.road}</svg>`;
   }
 
-  /* ---------------- route art (per-trek mountain illustration) ---------------- */
-  const ART_PALETTES = [
-    { far: "#cdf1dd", mid: "#5fcf92", near: "#0f9d63", snow: "#ffffff" },
-    { far: "#a0e3bc", mid: "#0f9d63", near: "#067a4c", snow: "#ffffff" },
-    { far: "#5fcf92", mid: "#067a4c", near: "#06412a", snow: "#ffffff" },
-  ];
+  /* ---------------- route art (per-trek topographic contour illustration) ---------------- */
+  function catmullRomClosedPath(points) {
+    const n = points.length;
+    let d = `M${points[0][0].toFixed(1)},${points[0][1].toFixed(1)} `;
+    for (let i = 0; i < n; i++) {
+      const p0 = points[(i - 1 + n) % n];
+      const p1 = points[i];
+      const p2 = points[(i + 1) % n];
+      const p3 = points[(i + 2) % n];
+      const c1x = p1[0] + (p2[0] - p0[0]) / 6;
+      const c1y = p1[1] + (p2[1] - p0[1]) / 6;
+      const c2x = p2[0] - (p3[0] - p1[0]) / 6;
+      const c2y = p2[1] - (p3[1] - p1[1]) / 6;
+      d += `C${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)} `;
+    }
+    return d + "Z";
+  }
+
+  // same irregular footprint used for the hero topo art, reused at card scale
+  const CONTOUR_NOISE = [1.3, 1.0, 0.8, 1.1, 0.68, 0.5, 0.72, 0.58, 0.88, 1.15];
+
+  function contourRing(cx, cy, baseR, ringIndex) {
+    const scale = baseR * (ringIndex + 1);
+    const pts = CONTOUR_NOISE.map((nz, i) => {
+      const angle = (i * 360) / CONTOUR_NOISE.length;
+      const rad = (angle * Math.PI) / 180;
+      const r = scale * nz;
+      return [cx + r * Math.cos(rad), cy + r * Math.sin(rad) * 0.68];
+    });
+    return catmullRomClosedPath(pts);
+  }
+
+  // outer (light) to inner (deep) ramps, keyed by difficulty tier 1-3
+  const ART_RAMPS = {
+    1: ["#eef3ec", "#d6e4d4", "#aecaa9", "#7fab79"],
+    2: ["#d6e4d4", "#aecaa9", "#3c7a54", "#234f38"],
+    3: ["#aecaa9", "#3c7a54", "#234f38", "#152e22"],
+  };
+
   function buildRouteArt(trek, index) {
-    const p = ART_PALETTES[index % ART_PALETTES.length];
-    const seed = index * 37;
+    const ramp = ART_RAMPS[trek.difficulty] || ART_RAMPS[2];
+    const ringCount = 3 + trek.difficulty; // taller difficulty -> a few more contours
+    const cx = 170, cy = 165, baseR = 11;
+    let rings = "";
+    for (let i = ringCount - 1; i >= 0; i--) {
+      const color = ramp[Math.min(ramp.length - 1, Math.floor((i / ringCount) * ramp.length))];
+      const width = 1.2 + (ringCount - i) * 0.15;
+      rings += `<path d="${contourRing(cx, cy, baseR, i)}" fill="none" stroke="${color}" stroke-width="${width.toFixed(2)}"/>`;
+    }
     return `
-    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration for ${escapeHtml(trek.name)}">
-      <rect width="400" height="300" fill="${p.far}" opacity="0.25"/>
-      <path d="M0 210 L${60+seed%20} 130 L120 190 L${190-seed%10} 90 L250 180 L320 120 L400 200 L400 300 L0 300 Z" fill="${p.mid}" opacity="0.7"/>
-      <path d="M${190-seed%10} 90 L205 112 L172 118 Z" fill="${p.snow}" opacity="0.9"/>
-      <path d="M0 250 L80 180 L140 230 L${210+seed%15} 150 L280 235 L360 190 L400 240 L400 300 L0 300 Z" fill="${p.near}"/>
-      <path d="M${210+seed%15} 150 L232 176 L190 182 Z" fill="${p.snow}"/>
-      <path d="M80 180 L98 202 L63 207 Z" fill="${p.snow}" opacity="0.85"/>
-      <path d="M20 290 C 80 260, 120 275, 170 250 S 260 240, 300 265 S 370 280, 395 260" stroke="${p.snow}" stroke-width="3" stroke-dasharray="1 8" fill="none" opacity="0.7"/>
+    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Topographic illustration for ${escapeHtml(trek.name)}">
+      <rect width="400" height="300" fill="#faf6ec"/>
+      <path d="M20 270 C 70 240, 100 210, ${cx - 40} ${cy + 55} S ${cx - 5} ${cy + 15}, ${cx} ${cy + 5}" stroke="#aecaa9" stroke-width="1.6" stroke-dasharray="1 7" fill="none" opacity="0.6"/>
+      ${rings}
+      <circle cx="${cx}" cy="${cy}" r="7" fill="none" stroke="#c15a2e" stroke-width="1.2" opacity="0.5"/>
+      <circle cx="${cx}" cy="${cy}" r="3.2" fill="#c15a2e"/>
+      <text x="${cx + 12}" y="${cy - 2}" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#152e22">${trek.maxAltitudeM.toLocaleString()}m</text>
     </svg>`;
   }
 
@@ -109,15 +148,19 @@
     const areaPath = `${linePath} L${coords[coords.length - 1].x.toFixed(1)},${base} L${coords[0].x.toFixed(1)},${base} Z`;
 
     const gradId = `altGrad-${trek.id}`;
+    const peakIndex = vals.indexOf(max);
     let labels = "";
     let dots = "";
     coords.forEach((c, i) => {
+      const isPeak = i === peakIndex;
       const above = i % 2 === 0;
       const valueY = above ? c.y - 24 : c.y + 26;
       const labelY = above ? c.y - 10 : c.y + 40;
       labels += `<text x="${c.x}" y="${valueY}" text-anchor="middle" class="alt-point-value">${c.m.toLocaleString()}m</text>`;
       labels += `<text x="${c.x}" y="${labelY}" text-anchor="middle" class="alt-point-label">${escapeHtml(c.label)}</text>`;
-      dots += `<circle cx="${c.x}" cy="${c.y}" r="4.5" fill="#ffffff" stroke="#067a4c" stroke-width="2.5"/>`;
+      dots += isPeak
+        ? `<circle cx="${c.x}" cy="${c.y}" r="6.5" fill="none" stroke="#c15a2e" stroke-width="1.4" opacity="0.5"/><circle cx="${c.x}" cy="${c.y}" r="4.5" fill="#c15a2e"/>`
+        : `<circle cx="${c.x}" cy="${c.y}" r="4.5" fill="#ffffff" stroke="#234f38" stroke-width="2.5"/>`;
     });
 
     return `
@@ -126,12 +169,12 @@
         <svg viewBox="0 0 ${w} ${h}" class="altitude-svg" role="img" aria-label="Altitude profile for ${escapeHtml(trek.name)}, ranging from ${min.toLocaleString()} to ${max.toLocaleString()} metres">
           <defs>
             <linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0f9d63" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#0f9d63" stop-opacity="0"/>
+              <stop offset="0%" stop-color="#3c7a54" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#3c7a54" stop-opacity="0"/>
             </linearGradient>
           </defs>
           <path d="${areaPath}" fill="url(#${gradId})"/>
-          <path d="${linePath}" fill="none" stroke="#067a4c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="${linePath}" fill="none" stroke="#234f38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           ${dots}
           ${labels}
         </svg>

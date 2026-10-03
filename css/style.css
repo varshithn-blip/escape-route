@@ -1,52 +1,52 @@
 /* ============================================================
    Escape Route — Himalayan Trekking Co.
-   Palette: white / vibrant green, with beige kept as a small accent.
-   Serif display + clean sans body + a cursive accent for flourishes.
+   Palette: deep forest green + warm paper cream, terracotta accent.
+   Fraunces for display, Inter for body. Topographic line motifs
+   stand in for literal illustration.
    ============================================================ */
 
 :root {
   --white: #ffffff;
-  --cream: #f4fbf7;
-  --beige-50: #f8f1e1;
-  --beige-100: #efe0c2;
-  --beige-200: #e3cda0;
-  --green-50: #eafaf1;
-  --green-100: #cdf1dd;
-  --green-200: #a0e3bc;
-  --green-300: #5fcf92;
-  --green-500: #0f9d63;
-  --green-700: #067a4c;
-  --green-900: #06412a;
-  --ink: #10261a;
-  --ink-soft: #49614f;
-  --accent: #0c8a56;
-  --accent-dark: #066b41;
-  --good: #1f9d55;
+  --cream: #faf6ec;
+  --beige-50: #f3ead5;
+  --beige-100: #e8d9b8;
+  --beige-200: #dac498;
+  --green-50: #eef3ec;
+  --green-100: #d6e4d4;
+  --green-200: #aecaa9;
+  --green-300: #7fab79;
+  --green-500: #3c7a54;
+  --green-700: #234f38;
+  --green-900: #152e22;
+  --ink: #16261e;
+  --ink-soft: #52635a;
+  --accent: #c15a2e;
+  --accent-dark: #a0481f;
+  --good: #3c7a54;
   --warn: #b4832f;
-  --critical: #a84a3a;
-  --ring: rgba(12, 138, 86, 0.3);
+  --critical: #c15a2e;
+  --ring: rgba(193, 90, 46, 0.3);
 
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 28px;
 
-  --shadow-sm: 0 2px 8px rgba(6, 65, 42, 0.06);
-  --shadow-md: 0 8px 24px rgba(6, 65, 42, 0.1);
-  --shadow-lg: 0 20px 48px rgba(6, 65, 42, 0.16);
+  --shadow-sm: 0 2px 8px rgba(21, 46, 34, 0.07);
+  --shadow-md: 0 8px 24px rgba(21, 46, 34, 0.1);
+  --shadow-lg: 0 20px 48px rgba(21, 46, 34, 0.16);
 
   --font-display: "Fraunces", "Georgia", serif;
-  --font-body: "Outfit", "Segoe UI", sans-serif;
-  --font-script: "Caveat", cursive;
+  --font-body: "Inter", "Segoe UI", sans-serif;
 
   --container: 1180px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --white: #211a14;
-    --cream: #251e17;
-    --ink: #f3ebe0;
-    --ink-soft: #cbb9a3;
+    --white: #16241c;
+    --cream: #11201a;
+    --ink: #eef3ec;
+    --ink-soft: #b7c7bd;
   }
 }
 
@@ -84,22 +84,39 @@ p { margin: 0 0 1em; color: var(--ink-soft); }
   padding: 0 24px;
 }
 
-.script-accent {
-  font-family: var(--font-script);
-  font-size: 1.6em;
+.wordmark-tag {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--accent);
-  font-weight: 500;
-  display: inline-block;
-  transform: rotate(-2deg);
+  border: 1px solid var(--green-200);
+  border-radius: 999px;
+  padding: 3px 9px;
+  margin-left: 4px;
 }
 
 .eyebrow {
-  font-family: var(--font-script);
-  font-size: 1.4rem;
-  color: var(--accent-dark);
-  margin-bottom: 0.1em;
-  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1.5px;
+  background: var(--accent);
+  display: inline-block;
+}
+.section-head .eyebrow { justify-content: center; }
 
 .section {
   padding: 96px 0;
@@ -181,17 +198,18 @@ p { margin: 0 0 1em; color: var(--ink-soft); }
   color: var(--green-900);
 }
 .brand svg { width: 34px; height: 34px; }
-.brand .script-accent { font-size: 0.95rem; margin-left: 2px; }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
-  font-weight: 500;
+  gap: 36px;
+  font-weight: 600;
 }
 .nav-links a {
   color: var(--green-700);
-  font-size: 0.95rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   position: relative;
   padding: 4px 0;
 }
@@ -230,7 +248,7 @@ p { margin: 0 0 1em; color: var(--ink-soft); }
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: linear-gradient(180deg, #ffffff 0%, var(--green-50) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, var(--cream) 100%);
 }
 .hero-bg {
   position: absolute;
@@ -250,7 +268,6 @@ p { margin: 0 0 1em; color: var(--ink-soft); }
   padding-bottom: 80px;
 }
 .hero-copy { flex: 1.1 1 0%; min-width: 0; }
-.hero-copy .eyebrow { font-size: 1.7rem; }
 .hero-copy h1 {
   font-size: clamp(2.6rem, 5vw, 4.2rem);
   letter-spacing: -0.01em;
@@ -281,13 +298,6 @@ p { margin: 0 0 1em; color: var(--ink-soft); }
 
 .hero-art { position: relative; flex: 0.9 1 0%; min-width: 0; }
 .hero-art svg { width: 100%; height: auto; }
-
-.curve-divider {
-  display: block;
-  width: 100%;
-  height: 60px;
-  margin-top: -1px;
-}
 
 /* ---------- Feature strip ---------- */
 .features {
@@ -342,7 +352,8 @@ p { margin: 0 0 1em; color: var(--ink-soft); }
 }
 .route-art svg { width: 100%; height: 100%; }
 
-.route-title-block .eyebrow { font-size: 1.1rem; margin-bottom: 2px; }
+.route-title-block .eyebrow { font-size: 0.72rem; margin-bottom: 6px; }
+.route-title-block .eyebrow::before { width: 16px; }
 .route-title-block h3 { font-size: 1.55rem; margin-bottom: 4px; }
 .route-region { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 12px; display: block;}
 .route-tagline { font-style: italic; color: var(--green-500); margin: 0; font-size: 0.95rem; }
@@ -352,15 +363,15 @@ p { margin: 0 0 1em; color: var(--ink-soft); }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--beige-50);
-  border: 1px solid var(--beige-100);
+  background: var(--white);
+  border: 1.5px solid var(--green-200);
   color: var(--green-700);
   border-radius: 999px;
   padding: 6px 14px;
   font-size: 0.82rem;
   font-weight: 600;
 }
-.chip svg { width: 15px; height: 15px; }
+.chip svg { width: 15px; height: 15px; color: var(--accent); }
 
 .route-toggle {
   display: flex;
